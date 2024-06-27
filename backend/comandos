@@ -1,0 +1,12 @@
+npm init
+npm i cors
+npm i express
+npm i nodemon
+npm i dotenv
+npm i morgan
+npm i express-validator
+npm run dev
+npm i bcrypt
+npm i encrypt//uno de estos para encriptar
+npm i bcryptjs
+falta encriptar contraseñas

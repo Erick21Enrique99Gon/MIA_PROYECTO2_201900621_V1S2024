@@ -1,0 +1,6 @@
+docker-compose up
+docker exec -it mongo mongosh -u root -p root
+
+db.Usuarios.insertOne({"nombre":"Juan","apellido":"Perez","email":"asas@sd.com","password":"1234","rol":"admin"});
+db.Usuarios.find()
+show collections;
