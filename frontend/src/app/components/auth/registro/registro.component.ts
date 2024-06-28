@@ -5,6 +5,7 @@ import { ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router,RouterOutlet,RouterModule } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 import { UsuarioService } from '../../../services/usuario.service';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-registro',
@@ -45,24 +46,46 @@ export class RegistroComponent {
         alert('Las contraseñas no coinciden');
       } else
       {const data = this.form_registro.value;
+        Object.assign(data, {tipo: 'usuario'}); // Object.assign(data, {tipo: 'usuario'}
+        console.log(data);
         this.usuarioService.consult_post('/admin/registro', data).subscribe({
           next: (data: any) => {
             console.log(data.msg);
             if(data.status === true){
-              alert('Registro exitoso');
+              Swal.fire({
+                title: 'Registro exitoso',
+                text: data.msg || '',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+              });
               // this.router.navigate(['/login']);
             } else {
-              alert('Error al registrar');
+              Swal.fire({
+                title: 'Error registrar usuario',
+                text: data.msg,
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+              });
             }
           },
           error: (error: any) => {
             console.log(error);
-            alert('Error al registrar');
+            Swal.fire({
+              title: 'Error registrar usuario',
+              text: 'Error en el servidor',
+              icon: 'error',
+              confirmButtonText: 'Aceptar'
+            });
           }}
         );
       }
     } else {
-      alert('Complete todos los campos');
+      Swal.fire({
+        title: 'Error registrar usuario',
+        text: 'Campos vacios o incorrectos',
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      });
     }
   }
 }

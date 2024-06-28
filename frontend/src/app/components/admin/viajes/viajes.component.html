@@ -1,0 +1,71 @@
+<main>
+    <div class="container">
+
+        <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+                        <div class="d-flex justify-content-center py-4">
+                            <a href="index.html" class="logo d-flex align-items-center w-auto">
+                                <img src="assets/img/logo.png" alt="">
+                                <span class="d-none d-lg-block">NiceAdmin</span>
+                            </a>
+                        </div><!-- End Logo -->
+
+                        <div class="card mb-3">
+
+                            <div class="card-body">
+
+                                <div class="pt-4 pb-2">
+                                    <h5 class="card-title text-center pb-0 fs-4">Crear Viaje</h5>
+                                    <p class="text-center small">Ingrese los datos para crear Viaje</p>
+                                </div>
+
+                                <form [formGroup]="form_registro" (ngSubmit)="registro()" class="row g-3 needs-validation" novalidate>
+                                    <div class="col-12">
+                                        <label for="nombre_agencia" class="form-label">Nombre de la Agencia</label>
+                                        <input formControlName="nombre_agencia" type="text" name="name" class="form-control" id="nombre_agencia" required>
+                                        <div class="invalid-feedback">Por favor, ingrese su nombre de la Agencia</div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="ciudad_origen" class="form-label">Ciudad Origen</label>
+                                        <input formControlName="ciudad_origen" type="text" name="ciudad_origen" class="form-control" id="ciudad_origen" required>
+                                        <div class="invalid-feedback">Por favor, ingrese la ciudad de Origen</div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="ciudad_destino" class="form-label">Ciudad Destino</label>
+                                        <input formControlName="ciudad_destino" type="text" name="ciudad_destino" class="form-control" id="ciudad_destino" required>
+                                        <div class="invalid-feedback">Por favor, ingrese su la ciudad de Destino</div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="dias_vuelo" class="form-label">Dias de vuelo</label>
+                                        <input formControlName="dias_vuelo" type="text" name="dias_vuelo" class="form-control" id="dias_vuelo" required>
+                                        <div class="invalid-feedback">Por favor, ingrese Dias de vuelo</div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="precio_vuelo" class="form-label">Precio de vuelo</label>
+                                        <input formControlName="precio_vuelo" type="text" name="precio_vuelo" class="form-control" id="precio_vuelo" required>
+                                        <div class="invalid-feedback">Por favor, ingrese Precio de vuelo</div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <button class="btn btn-primary w-100" type="submit">Crear Viaje</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+</main><!-- End #main -->

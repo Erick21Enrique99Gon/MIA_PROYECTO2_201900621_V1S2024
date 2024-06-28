@@ -2,5 +2,5 @@ ng new frontend
 rm -rf node_modules package-lock.json
 npm install
 ng serve
-bg g c <componenetes> compoments/auth/login
+ng g c components/auth/login <componenetes>
 ng g s <servicios> services/usuario

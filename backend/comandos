@@ -10,3 +10,4 @@ npm i bcrypt
 npm i encrypt//uno de estos para encriptar
 npm i bcryptjs
 falta encriptar contraseñas
+npm i aws-sdk

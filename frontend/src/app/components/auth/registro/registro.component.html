@@ -19,10 +19,16 @@
 
                                 <div class="pt-4 pb-2">
                                     <h5 class="card-title text-center pb-0 fs-4">Crear Cuenta</h5>
-                                    <p class="text-center small">Ingrese los datos pesonales para crear Cuenta</p>
+                                    <p class="text-center small">Ingrese los datos pesonales para crear Usuario</p>
                                 </div>
 
                                 <form [formGroup]="form_registro" (ngSubmit)="registro()" class="row g-3 needs-validation" novalidate>
+                                    <div class="col-12">
+                                        <label for="imagen" class="form-label">Imagen</label>
+                                        <input formControlName="imagen" type="file" name="name" class="form-control" id="imagen" required>
+                                        <div class="invalid-feedback">Por favor, ingrese su imagen</div>
+                                    </div>
+
                                     <div class="col-12">
                                         <label for="yourName" class="form-label">Nombre</label>
                                         <input formControlName="nombre" type="text" name="name" class="form-control" id="yourName" required>
@@ -62,7 +68,7 @@
                                     </div>
 
                                     <div class="col-12">
-                                        <button class="btn btn-primary w-100" type="submit">Create Account</button>
+                                        <button class="btn btn-primary w-100" type="submit">Crear Cuenta</button>
                                     </div>
                                 </form>
 

@@ -6,6 +6,7 @@ dotenv.config();
 const registroViajes = async (req,res)=>{
     const {usuario,nombre_agencia_origen_destino,dias_vuelo,precio_vuelo}=req.body;
     console.log(req.body);
+    const estado = false;
     console.log(usuario,nombre_agencia_origen_destino,dias_vuelo,precio_vuelo);
 
     const collection = usuario+'ViajesUsuarios';
@@ -15,7 +16,8 @@ const registroViajes = async (req,res)=>{
         ciudad_origen,
         ciudad_destino,
         dias_vuelo,
-        precio_vuelo
+        precio_vuelo,
+        estado
     });
 
     if(result instanceof Error){
@@ -34,6 +36,7 @@ const registroViajes = async (req,res)=>{
 const registroAutos = async (req,res)=>{
     const {usuario,nombre_agencia,marca,modelo,precio}=req.body;
     console.log(req.body);
+    estado = false;
     console.log(usuario,nombre_agencia,marca,modelo,precio);
 
     const collection =usuario+ 'AutosUsuarios';
@@ -42,7 +45,8 @@ const registroAutos = async (req,res)=>{
         nombre_agencia,
         marca,
         modelo,
-        precio
+        precio,
+        estado
     });
 
     if(result instanceof Error){
