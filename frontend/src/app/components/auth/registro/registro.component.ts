@@ -27,6 +27,8 @@ export class RegistroComponent {
   ) {}
 
   form_registro = new FormGroup({
+    path: new FormControl(''),
+    imagen: new FormControl(''),
     nombre: new FormControl('', Validators.required),
     apellido: new FormControl('', Validators.required),
     usuario: new FormControl('', Validators.required),  
@@ -34,11 +36,9 @@ export class RegistroComponent {
     password: new FormControl('', Validators.required),
     confirm_password: new FormControl('', Validators.required)
   });
-  // [
-  //   Validators.minLength(8),
-  //   Validators.required,
-  //   Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9])')
-  // ]
+  imagen: any = '';
+  imagen_path: any = '';
+  imagen_base64: any = '';
 
   registro(){
     if(this.form_registro.valid){
@@ -47,6 +47,7 @@ export class RegistroComponent {
       } else
       {const data = this.form_registro.value;
         Object.assign(data, {tipo: 'usuario'}); // Object.assign(data, {tipo: 'usuario'}
+        Object.assign(data, {imagen: this.imagen_base64});
         console.log(data);
         this.usuarioService.consult_post('/admin/registro', data).subscribe({
           next: (data: any) => {
@@ -88,4 +89,17 @@ export class RegistroComponent {
       });
     }
   }
+
+  onFileSelected(event: any){
+    // Seleccionar el archivo y convertirlo a base64
+    this.imagen = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = (event:any) => {
+      this.imagen_path = event.target.result;
+      console.log(reader.result);
+      this.imagen_base64 = reader.result;
+    }
+    reader.readAsDataURL(this.imagen);
+  }
+
 }

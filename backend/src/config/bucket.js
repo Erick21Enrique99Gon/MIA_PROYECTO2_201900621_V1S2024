@@ -1,4 +1,5 @@
 const aws = require('aws-sdk');
+const { promisify } = require('util');
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -17,25 +18,33 @@ const uploadFile = async (req,res) => {
         secretAccessKey: BUCKET_USER_SECRET,
         region: BUCKET_REGION
     });
-    const {path,image} = req.body;
-    const buffer = new Buffer.from(path,'base64');
+    const {path,imagen} = req.body;
+
+    var contentype = imagen.substring(0,imagen.indexOf(';'));
+    contentype = contentype.substring(contentype.indexOf('/')+1);
+    var newpath = path+'.'+contentype;
+    contentype = 'image/'+contentype;
+    console.log(contentype);
+    var imagenSub = imagen.substring(imagen.indexOf(',')+1);
+    imagenSub = Buffer.from(imagenSub,'base64');
     const params = {
         Bucket: BUCKET_NAME,
-        Key: path,
-        Body: image,
-        ACL: 'public-read',
+        Key: newpath,
+        Body: imagenSub,
+        ContentType: contentype
     };
-    s3.upload(params,(error,data) => {
-        if(error){
-            console.error(error);
-            return res.status(500
-            ).send('Error al subir la imagen');
-        }
-        console.log(data);
-        return res.status(200).send('Imagen subida correctamente');
+
+    const upload = promisify(s3.upload.bind(s3));
+
+    try {
+        const data = await upload(params);
+        return data;
+    } catch (error) {
+        return error;
     }
-    );
+
 };
+
 
 module.exports = {
     uploadFile

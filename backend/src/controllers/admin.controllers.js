@@ -1,4 +1,5 @@
 const { insertData, findData } = require("../config/db.mongo");
+const { uploadFile } = require("../config/bucket");
 const bcrypt = require('bcryptjs');
 const dotenv = require('dotenv');
 dotenv.config();
@@ -16,9 +17,11 @@ const ciclo_for = async (req,res)=>{
 };
 
 const registro = async (req,res)=>{
-    const {nombre,apellido,usuario,correo,password,tipo}=req.body;
-    console.log(req.body);
+    const {nombre,apellido,usuario,correo,password,tipo,imagen}=req.body;
+    
     console.log(nombre,apellido,usuario,correo,password,tipo);
+
+    const path = `usuarios/${usuario}`;
 
     const user = await findData('Usuarios',{usuario});
 
@@ -30,7 +33,21 @@ const registro = async (req,res)=>{
             data: user
         });
     }
-    
+
+    const result_bucket = await uploadFile({body:{path,imagen}});
+
+    console.log(result_bucket);
+
+    console.log("result bucket",result_bucket); 
+
+    if(result_bucket instanceof Error){
+        return res.status(500).json({
+            status: false,
+            msg: "Error",
+            data: result_bucket
+        });
+    }
+
     const salt = bcrypt.genSaltSync(10);
 
     const password_encrypted = await bcrypt.hash(password,salt);
@@ -42,7 +59,8 @@ const registro = async (req,res)=>{
         usuario,
         correo,
         password_encrypted,
-        tipo
+        tipo,
+        imagen: result_bucket.Location
     });
 
     if(result instanceof Error){
@@ -52,6 +70,8 @@ const registro = async (req,res)=>{
             data: result
         });
     }
+
+    
 
     res.status(200).json({
         status : true,
@@ -134,6 +154,8 @@ const registroAutos = async (req,res)=>{
         msg: "Auto registrado exitosamente",
     });
 };
+
+
 
 module.exports = {
     ciclo_for,
