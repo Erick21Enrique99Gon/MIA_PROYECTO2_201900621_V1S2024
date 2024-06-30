@@ -1,0 +1,128 @@
+<main>
+    <div class="container">
+
+        <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+                        <div class="d-flex justify-content-center py-4">
+                            <a href="index.html" class="logo d-flex align-items-center w-auto">
+                                <img src="assets/img/logo.png" alt="">
+                                <span class="d-none d-lg-block">NiceAdmin</span>
+                            </a>
+                        </div><!-- End Logo -->
+
+                        <div class="card mb-3">
+
+                            <div class="card-body">
+
+                                <div class="pt-4 pb-2">
+                                    <h5 class="card-title text-center pb-0 fs-4">Viajes</h5>
+                                    <p class="text-center small">Viajes cargados</p>
+                                </div>
+
+                                <div class="card-body">
+
+                                    <!-- Table with stripped rows -->
+                                    <table class="table datatable">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <b>N</b>ombre de la Agencia
+                                                </th>
+                                                <th>
+                                                    <b>C</b>iudad de origen
+                                                </th>
+                                                <th>
+                                                    <b>C</b>iudad de destino
+                                                </th>
+                                                <th>
+                                                    <b>D</b>ias de viaje
+                                                </th>
+                                                <th>
+                                                    <b>P</b>recio del viaje
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let viaje of viajes">
+                                                <td>{{viaje.nombre_agencia}}</td>
+                                                <td>{{viaje.ciudad_origen}}</td>
+                                                <td>{{viaje.ciudad_destino}}</td>
+                                                <td>{{viaje.dias_vuelo}}</td>
+                                                <td>{{viaje.precio_vuelo}}</td>
+                                                <!-- <td><button class="btn btn-danger" (click)="eliminar(viaje)">Eliminar</button></td> -->
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <!-- End Table with stripped rows -->
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="card mb-3">
+
+                            <div class="card-body">
+
+                                <div class="pt-4 pb-2">
+                                    <h5 class="card-title text-center pb-0 fs-4">Autos</h5>
+                                    <p class="text-center small">Autos cargados</p>
+                                </div>
+
+                                <div class="card-body">
+
+                                    <!-- Table with stripped rows -->
+                                    <table class="table datatable">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <b>N</b>ombre de la Agencia
+                                                </th>
+                                                <th>
+                                                    <b>M</b>arca
+                                                </th>
+                                                <th>
+                                                    <b>P</b>laca
+                                                </th>
+                                                <th>
+                                                    <b>M</b>odelo
+                                                </th>
+                                                <th>
+                                                    <b>P</b>recio
+                                                </th>
+                                                <th>
+                                                    <b>C</b>iudad en la que se encuentra el auto
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let Auto of carros">
+                                                <td>{{Auto.nombre_agencia}}</td>
+                                                <td>{{Auto.marca}}</td>
+                                                <td>{{Auto.placa}}</td>
+                                                <td>{{Auto.modelo}}</td>
+                                                <td>{{Auto.precio}}</td>
+                                                <td>{{Auto.ciudad}}</td>
+                                                <!-- <td><button class="btn btn-danger"
+                                                        (click)="eliminar(Auto)">Eliminar</button></td> -->
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <!-- End Table with stripped rows -->
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+</main><!-- End #main -->

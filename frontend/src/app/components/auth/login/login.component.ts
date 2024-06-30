@@ -45,18 +45,18 @@ export class LoginComponent {
               icon: 'success',
               confirmButtonText: 'Aceptar'
             });
-            localStorage.setItem('nombre', data.nombre);
-            localStorage.setItem('apellido', data.apellido);
-            localStorage.setItem('usuario', data.usuario);
-            localStorage.setItem('correo', data.correo);
-            localStorage.setItem('tipo', data.tipo);
-            if(data.tipo === 'admin'){
-              alert('Bienvenido admin');
-              // this.router.navigate(['/admin']);
-            }else if(data.tipo === 'user'){
-              alert('Bienvenido user');
-              // this.router.navigate(['/user']);
-            }else if(data.tipo === 'recepcionista'){
+            console.log(data.data);
+            console.log(data.data[0]);
+            localStorage.setItem('nombre', data.data[0].nombre);
+            localStorage.setItem('apellido', data.data[0].apellido);
+            localStorage.setItem('usuario', data.data[0].usuario);
+            localStorage.setItem('correo', data.data[0].correo);
+            localStorage.setItem('tipo', data.data[0].tipo);
+            if(data.data.tipo === 'admin'){
+              this.router.navigate(['/Registro']);
+            }else if(data.data[0].tipo === 'usuario'){
+              this.router.navigate(['/Reservar']);
+            }else if(data.data[0].tipo === 'recepcionista'){
               alert('Bienvenido recepcionista');
               // this.router.navigate(['/recepcionista']);
             }
