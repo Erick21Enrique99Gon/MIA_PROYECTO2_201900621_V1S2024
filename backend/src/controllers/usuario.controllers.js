@@ -4,10 +4,10 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const registroViajes = async (req,res)=>{
-    const {usuario,nombre_agencia_origen_destino,dias_vuelo,precio_vuelo}=req.body;
+    const {usuario,nombre_agencia,ciudad_origen,ciudad_destino,dias_vuelo,precio_vuelo}=req.body;
     console.log(req.body);
     const estado = false;
-    console.log(usuario,nombre_agencia_origen_destino,dias_vuelo,precio_vuelo);
+    console.log(usuario,nombre_agencia,ciudad_origen,ciudad_destino,dias_vuelo,precio_vuelo);
 
     const collection = usuario+'ViajesUsuarios';
 
@@ -29,7 +29,9 @@ const registroViajes = async (req,res)=>{
     }
 
     res.status(200).json({
-        msg: "Exito"
+        status: true,
+        msg: "Viaje reservado con exito",
+        data: result
     });
 };
 
@@ -58,7 +60,9 @@ const registroAutos = async (req,res)=>{
     }
 
     res.status(200).json({
-        msg: "Exito"
+        status: true,
+        msg: "Auto reservado con exito",
+        data: result
     });
 };
 

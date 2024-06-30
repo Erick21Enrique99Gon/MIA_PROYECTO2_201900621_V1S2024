@@ -52,7 +52,8 @@
                                                 <td>{{viaje.ciudad_destino}}</td>
                                                 <td>{{viaje.dias_vuelo}}</td>
                                                 <td>{{viaje.precio_vuelo}}</td>
-                                                <!-- <td><button class="btn btn-danger" (click)="eliminar(viaje)">Eliminar</button></td> -->
+                                                <td><button class="btn"style="background-color: blue; color: white;"
+                                                    (click)="reservarViaje(viaje)">Reservar</button></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -106,8 +107,8 @@
                                                 <td>{{Auto.modelo}}</td>
                                                 <td>{{Auto.precio}}</td>
                                                 <td>{{Auto.ciudad}}</td>
-                                                <!-- <td><button class="btn btn-danger"
-                                                        (click)="eliminar(Auto)">Eliminar</button></td> -->
+                                                <td><button class="btn"style="background-color: blue; color: white;"
+                                                        (click)="reservarAuto(Auto)">Reservar</button></td>
                                             </tr>
                                         </tbody>
                                     </table>

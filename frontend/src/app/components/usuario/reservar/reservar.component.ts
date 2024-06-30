@@ -54,6 +54,54 @@ export class ReservarComponent {
     });
   }
 
+  reservarAuto(reservandoAuto: any) {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: '¿Estás seguro de que deseas reservarAuto este auto?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, reservarAuto',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if(result.isConfirmed){
+        console.log(reservandoAuto);
+        Object.assign(reservandoAuto, {usuario: localStorage.getItem('usuario')});
+        console.log(reservandoAuto);
+        this.usuarioService.consult_post('/usuario/registroAutos', reservandoAuto).subscribe({
+          next: (data: any) => {
+            if(data.status === true){
+              Swal.fire({
+                title: 'Auto reservado',
+                text: data.msg,
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+              });
+              console.log(data.msg);
+              this.cargarAutos();
+            } else {
+              Swal.fire({
+                title: 'Error al reservarAuto auto',
+                text: data.msg,
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+              });
+            }
+          },
+          error: (error: any) => {
+            console.log(error);
+            Swal.fire({
+              title: 'Error al reservarAuto auto',
+              text: 'Error en el servidor',
+              icon: 'error',
+              confirmButtonText: 'Aceptar'
+            });
+          }
+        });
+        // Swal.fire('auto eliminado', 'auto eliminado correctamente', 'success');
+      }
+    });
+  }
+
   cargarViajes() {
     this.usuarioService.consult_get("/admin/viajes").subscribe({
       next: (data: any) => {
@@ -79,5 +127,53 @@ export class ReservarComponent {
       }
     }
     );
+  }
+
+  reservarViaje(reservandoViaje: any) {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: '¿Estás seguro de que deseas reservar este viaje?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, reservar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if(result.isConfirmed){
+        console.log(reservandoViaje);
+        Object.assign(reservandoViaje, {usuario: localStorage.getItem('usuario')});
+        console.log(reservandoViaje);
+        this.usuarioService.consult_post('/usuario/registroViajes', reservandoViaje).subscribe({
+          next: (data: any) => {
+            if(data.status === true){
+              Swal.fire({
+                title: 'Viaje reservado',
+                text: data.msg,
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+              });
+              console.log(data.msg);
+              this.cargarViajes();
+            } else {
+              Swal.fire({
+                title: 'Error al reservar viaje',
+                text: data.msg,
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+              });
+            }
+          },
+          error: (error: any) => {
+            console.log(error);
+            Swal.fire({
+              title: 'Error al reservar viaje',
+              text: 'Error en el servidor',
+              icon: 'error',
+              confirmButtonText: 'Aceptar'
+            });
+          }
+        });
+        // Swal.fire('auto eliminado', 'auto eliminado correctamente', 'success');
+      }
+    });
   }
 }
