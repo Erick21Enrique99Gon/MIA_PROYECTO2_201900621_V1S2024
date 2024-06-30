@@ -26,6 +26,8 @@ export class RegistrarRecepcionistaComponent {
     private router: Router
   ) {}
   form_registro = new FormGroup({
+    path: new FormControl(''),
+    imagen: new FormControl(''),
     nombre: new FormControl('', Validators.required),
     apellido: new FormControl('', Validators.required),
     usuario: new FormControl('', Validators.required),  
@@ -33,6 +35,47 @@ export class RegistrarRecepcionistaComponent {
     password: new FormControl('', Validators.required),
     confirm_password: new FormControl('', Validators.required)
   });
+
+  navigateToRegistro(){
+    this.router.navigate(['/Registro']);
+  }
+  navigateToRegistroRecepcionista(){
+    this.router.navigate(['/RegistroRecepcionista']);
+  }
+  navigateToRegistroViaje(){
+    this.router.navigate(['/RegistroViaje']);
+  }
+  navigateToRegistroAuto(){
+    this.router.navigate(['/RegistroAuto']);
+  }
+  navigateToLogin(){
+    localStorage.removeItem('nombre');
+    localStorage.removeItem('apellido');
+    localStorage.removeItem('usuario');
+    localStorage.removeItem('correo');
+    localStorage.removeItem('tipo');
+    this.router.navigate(['/login']);
+  }
+
+  navigateToEditarViajes(){
+    this.router.navigate(['/EditarViajes']);
+  }
+
+  navigateToEditarAutos(){
+    this.router.navigate(['/EditarAutos']);
+  }
+
+  navigateToEditarUsuarios(){
+    this.router.navigate(['/EditarUsuarios']);
+  }
+
+  navigateToEditarRecepcionistas(){
+    this.router.navigate(['/EditarRecepcionistas']);
+  }
+
+  imagen: any = '';
+  imagen_path: any = '';
+  imagen_base64: any = '';
   registro(){
     if(this.form_registro.valid){
       if(this.form_registro.value.password != this.form_registro.value.confirm_password){
@@ -40,7 +83,7 @@ export class RegistrarRecepcionistaComponent {
       } else
       {const data = this.form_registro.value;
         Object.assign(data, {tipo: 'recepcionista'}); // Object.assign(data, {tipo: 'recepcionista'}
-        console.log(data);
+        Object.assign(data, {imagen: this.imagen_base64});
         this.usuarioService.consult_post('/admin/registro', data).subscribe({
           next: (data: any) => {
             console.log(data.msg);
@@ -80,5 +123,16 @@ export class RegistrarRecepcionistaComponent {
         confirmButtonText: 'Aceptar'
       });
     }
+  }
+
+  onFileSelected(event: any){
+    // Seleccionar el archivo y convertirlo a base64
+    this.imagen = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = (event:any) => {
+      this.imagen_path = event.target.result;
+      this.imagen_base64 = reader.result;
+    }
+    reader.readAsDataURL(this.imagen);
   }
 }

@@ -3,6 +3,7 @@ const router = Router();
 const {check} = require('express-validator');
 const validate = require('../middlewares/middleware');
 const adminController = require('../controllers/admin.controllers');
+const { route } = require('../app');
 
 router.get('/',(req,res)=>{
     res.status(200).json({
@@ -18,6 +19,7 @@ router.post('/registro', [
     check('correo','El correo es obligatorio').notEmpty(),
     check('password','El password es obligatorio').notEmpty(),
     check('tipo','El tipo es obligatorio').notEmpty(),
+    check('imagen','El imagen es obligatorio').notEmpty(),
     validate
 ] ,adminController.registro);
 router.post('/registroViajes', [
@@ -38,4 +40,13 @@ router.post('/registroAutos', [
     validate
 ] ,adminController.registroAutos);
 
+router.get('/usuarios',adminController.obtenerUsuarios);
+router.get('/recepcionistas',adminController.obtenerRecepcionistas);
+router.get('/viajes',adminController.obtenerViajes);
+router.get('/autos',adminController.obtenerAutos);
+
+router.post('/viajesEliminar',adminController.eliminarViaje);
+router.post('/autosEliminar',adminController.eliminarAuto);
+router.post('/usuariosEliminar',adminController.eliminarUsuario);
+router.post('/recepcionistasEliminar',adminController.eliminarRecepcionista);
 module.exports = router;

@@ -34,6 +34,42 @@ export class AutosComponent {
     precio: new FormControl('', Validators.required),
     ciudad: new FormControl('', Validators.required)
   });
+  navigateToRegistro(){
+    this.router.navigate(['/Registro']);
+  }
+  navigateToRegistroRecepcionista(){
+    this.router.navigate(['/RegistroRecepcionista']);
+  }
+  navigateToRegistroViaje(){
+    this.router.navigate(['/RegistroViaje']);
+  }
+  navigateToRegistroAuto(){
+    this.router.navigate(['/RegistroAuto']);
+  }
+  navigateToLogin(){
+    localStorage.removeItem('nombre');
+    localStorage.removeItem('apellido');
+    localStorage.removeItem('usuario');
+    localStorage.removeItem('correo');
+    localStorage.removeItem('tipo');
+    this.router.navigate(['/login']);
+  }
+
+  navigateToEditarViajes(){
+    this.router.navigate(['/EditarViajes']);
+  }
+
+  navigateToEditarAutos(){
+    this.router.navigate(['/EditarAutos']);
+  }
+
+  navigateToEditarUsuarios(){
+    this.router.navigate(['/EditarUsuarios']);
+  }
+
+  navigateToEditarRecepcionistas(){
+    this.router.navigate(['/EditarRecepcionistas']);
+  }
 
   registro(){
     if(this.form_registro.valid){

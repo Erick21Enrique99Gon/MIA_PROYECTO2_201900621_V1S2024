@@ -42,7 +42,54 @@ const findData = async (collection,query) => {
     }
 }
 
+const getFullCollection = async (collection,query,options) => {
+    const client = new MongoClient(uri);
+    try {
+        await client.connect();
+        const database = client.db(MONGO_DATABASE);
+        const col = database.collection(collection);
+        const result = await col.find(query,options).toArray();
+        return result;
+    } catch (error) {
+        console.error(error);
+    } finally {
+        await client.close();
+    }
+}
+const deleteData = async (collection,query)=>{
+    const client = new MongoClient(uri);
+    try {
+        await client.connect();
+        const database = client.db(MONGO_DATABASE);
+        const col = database.collection(collection);
+        const result = await col.deleteOne(query);
+        return result;
+    } catch (error) {
+        console.error(error);
+    } finally {
+        await client.close();
+    }
+}
+
+const dropTable = async (collection) => {
+    const client = new MongoClient(uri);
+    try {
+        await client.connect();
+        const database = client.db(MONGO_DATABASE);
+        const col = database.collection(collection);
+        const result = await col.drop();
+        return result;
+    } catch (error) {
+        console.error(error);
+    } finally {
+        await client.close();
+    }
+}
+
 module.exports = {
     insertData,
-    findData
+    findData,
+    getFullCollection,
+    deleteData,
+    dropTable
 };

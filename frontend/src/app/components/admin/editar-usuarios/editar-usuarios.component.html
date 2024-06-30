@@ -1,0 +1,89 @@
+<main>
+    <div class="container">
+        <div>
+            <button type="button" class="btn" (click)="navigateToRegistro()">Registro
+                Usuarios</button><!--(click)="navigateToSecond()"*/-->
+            <button type="button" class="btn" (click)="navigateToRegistroRecepcionista()">Registro
+                Recepcionistas</button>
+            <button type="button" class="btn" (click)="navigateToRegistroViaje()">Viajes</button>
+            <button type="button" class="btn" (click)="navigateToRegistroAuto()">Carros</button>
+            <button type="button" class="btn" (click)="navigateToEditarViajes()">Ver viajes</button>
+            <button type="button" class="btn" (click)="navigateToEditarAutos()">Ver carros</button>
+            <button type="button" class="btn" (click)="navigateToEditarRecepcionistas()">Ver Recepcionistas</button>
+            <button type="button" class="btn" (click)="navigateToEditarUsuarios()">Ver Usuarios</button>
+            <button type="button" class="btn" (click)="navigateToLogin()">Exit</button>
+        </div>
+
+        <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+                        <div class="d-flex justify-content-center py-4">
+                            <a href="index.html" class="logo d-flex align-items-center w-auto">
+                                <img src="assets/img/logo.png" alt="">
+                                <span class="d-none d-lg-block">NiceAdmin</span>
+                            </a>
+                        </div><!-- End Logo -->
+
+                        <div class="card mb-3">
+
+                            <div class="card-body">
+
+                                <div class="pt-4 pb-2">
+                                    <h5 class="card-title text-center pb-0 fs-4">Usuarios</h5>
+                                    <p class="text-center small">Usuarios cargados</p>
+                                </div>
+
+                                                <div class="card-body">
+
+                                                    <!-- Table with stripped rows -->
+                                                    <table class="table datatable">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>
+                                                                    <b>N</b>ombre
+                                                                </th>
+                                                                <th>
+                                                                    <b>A</b>pellido
+                                                                </th>
+                                                                <th>
+                                                                    <b>c</b>orreo electronico
+                                                                </th>
+                                                                <th>
+                                                                    <b>C</b>ontraseña
+                                                                </th>
+                                                                <th>
+                                                                    <b>F</b>oto de perfil
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr *ngFor="let usuario of usuarios">
+                                                                <td>{{usuario.nombre}}</td>
+                                                                <td>{{usuario.apellido}}</td>
+                                                                <td>{{usuario.correo}}</td>
+                                                                <td>{{usuario.usuario}}</td>
+                                                                <td>{{usuario.password_encrypted}}</td>
+                                                                <td> <img src="{{usuario.imagen}}" width="200" 
+                                                                    height="200"  > </td>
+                                                                <td><button class="btn btn-danger" (click)="eliminar(usuario)">Eliminar</button></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <!-- End Table with stripped rows srcset="" alt="5" sizes="5"-->
+
+                                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+</main><!-- End #main -->

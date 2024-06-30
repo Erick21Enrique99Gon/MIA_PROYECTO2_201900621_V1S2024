@@ -25,7 +25,7 @@ export class RegistroComponent {
     private usuarioService: UsuarioService,
     private router: Router
   ) {}
-
+  
   form_registro = new FormGroup({
     path: new FormControl(''),
     imagen: new FormControl(''),
@@ -40,6 +40,43 @@ export class RegistroComponent {
   imagen_path: any = '';
   imagen_base64: any = '';
 
+  navigateToRegistro(){
+    this.router.navigate(['/Registro']);
+  }
+  navigateToRegistroRecepcionista(){
+    this.router.navigate(['/RegistroRecepcionista']);
+  }
+  navigateToRegistroViaje(){
+    this.router.navigate(['/RegistroViaje']);
+  }
+  navigateToRegistroAuto(){
+    this.router.navigate(['/RegistroAuto']);
+  }
+  navigateToLogin(){
+    localStorage.removeItem('nombre');
+    localStorage.removeItem('apellido');
+    localStorage.removeItem('usuario');
+    localStorage.removeItem('correo');
+    localStorage.removeItem('tipo');
+    this.router.navigate(['/login']);
+  }
+
+  navigateToEditarViajes(){
+    this.router.navigate(['/EditarViajes']);
+  }
+
+  navigateToEditarAutos(){
+    this.router.navigate(['/EditarAutos']);
+  }
+
+  navigateToEditarUsuarios(){
+    this.router.navigate(['/EditarUsuarios']);
+  }
+
+  navigateToEditarRecepcionistas(){
+    this.router.navigate(['/EditarRecepcionistas']);
+  }
+
   registro(){
     if(this.form_registro.valid){
       if(this.form_registro.value.password != this.form_registro.value.confirm_password){
@@ -48,7 +85,6 @@ export class RegistroComponent {
       {const data = this.form_registro.value;
         Object.assign(data, {tipo: 'usuario'}); // Object.assign(data, {tipo: 'usuario'}
         Object.assign(data, {imagen: this.imagen_base64});
-        console.log(data);
         this.usuarioService.consult_post('/admin/registro', data).subscribe({
           next: (data: any) => {
             console.log(data.msg);
@@ -96,7 +132,6 @@ export class RegistroComponent {
     const reader = new FileReader();
     reader.onload = (event:any) => {
       this.imagen_path = event.target.result;
-      console.log(reader.result);
       this.imagen_base64 = reader.result;
     }
     reader.readAsDataURL(this.imagen);
