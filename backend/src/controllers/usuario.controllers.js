@@ -6,7 +6,7 @@ dotenv.config();
 const registroViajes = async (req,res)=>{
     const {usuario,nombre_agencia,ciudad_origen,ciudad_destino,dias_vuelo,precio_vuelo}=req.body;
     console.log(req.body);
-    const estado = false;
+    const estado = "Sin confirmar";
     console.log(usuario,nombre_agencia,ciudad_origen,ciudad_destino,dias_vuelo,precio_vuelo);
 
     const collection = usuario+'ViajesUsuarios';
@@ -38,7 +38,7 @@ const registroViajes = async (req,res)=>{
 const registroAutos = async (req,res)=>{
     const {usuario,nombre_agencia,marca,modelo,precio}=req.body;
     console.log(req.body);
-    estado = false;
+    estado = "Sin confirmar";
     console.log(usuario,nombre_agencia,marca,modelo,precio);
 
     const collection =usuario+ 'AutosUsuarios';

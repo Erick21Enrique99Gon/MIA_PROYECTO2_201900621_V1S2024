@@ -63,6 +63,10 @@ export class EditarUsuariosComponent {
     this.router.navigate(['/EditarRecepcionistas']);
   }
 
+  navigateToHistorial(){
+    this.router.navigate(['/Historial']);
+  }
+
   cargar() {
     this.usuarioService.consult_get("/admin/usuarios").subscribe({
       next: (data: any) => {

@@ -77,6 +77,10 @@ export class RegistroComponent {
     this.router.navigate(['/EditarRecepcionistas']);
   }
 
+  navigateToHistorial(){
+    this.router.navigate(['/Historial']);
+  }
+
   registro(){
     if(this.form_registro.valid){
       if(this.form_registro.value.password != this.form_registro.value.confirm_password){

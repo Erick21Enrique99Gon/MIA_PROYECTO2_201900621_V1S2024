@@ -3,25 +3,26 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterOutlet, RouterModule } from '@angular/router';
 import { UsuarioService } from '../../../services/usuario.service';
 import Swal from 'sweetalert2'
+
 @Component({
-  selector: 'app-editar-viajes',
+  selector: 'app-ver-historial',
   standalone: true,
   imports: [
     CommonModule,
     RouterOutlet,
     RouterModule,
   ],
-  templateUrl: './editar-viajes.component.html',
-  styleUrl: './editar-viajes.component.css'
+  templateUrl: './ver-historial.component.html',
+  styleUrl: './ver-historial.component.css'
 })
-export class EditarViajesComponent {
+export class VerHistorialComponent {
   constructor(
     private usuarioService: UsuarioService,
     private router: Router
   ) { }
 
-  viajes: any = [];
-
+  historial: any = [];
+  
   navigateToRegistro() {
     this.router.navigate(['/Registro']);
   }
@@ -64,16 +65,17 @@ export class EditarViajesComponent {
   }
 
   ngOnInit(): void {
-    this.cargarViajes();
+    this.cargar();
   }
-  cargarViajes() {
-    this.usuarioService.consult_get("/admin/viajes").subscribe({
+
+  cargar() {
+    this.usuarioService.consult_get("/admin/historial").subscribe({
       next: (data: any) => {
         if (data.status === true) {
-          this.viajes = data.data;
+          this.historial = data.data;
         } else {
           Swal.fire({
-            title: 'Error al cargar viajes',
+            title: 'Error al cargar historial',
             text: data.msg,
             icon: 'error',
             confirmButtonText: 'Aceptar'
@@ -83,7 +85,7 @@ export class EditarViajesComponent {
       error: (error: any) => {
         console.log(error.error.msg);
         Swal.fire({
-          title: 'Error al cargar viajes',
+          title: 'Error al cargar historial',
           text: 'Error en el servidor: '+ error.error.msg,
           icon: 'error',
           confirmButtonText: 'Aceptar'
@@ -91,45 +93,5 @@ export class EditarViajesComponent {
       }
     }
     );
-  }
-
-  eliminar(viajeEliminando: any) {
-    Swal.fire({
-      title: '¿Estás seguro?',
-      text: '¿Estás seguro de que deseas eliminar este viaje?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Sí, eliminar',
-      cancelButtonText: 'Cancelar'
-    }).then((result) => {
-      if(result.isConfirmed){
-        console.log(viajeEliminando);
-        this.usuarioService.consult_post('/admin/viajesEliminar', viajeEliminando).subscribe({
-          next: (data: any) => {
-            if(data.status === true){
-              console.log(data.msg);
-              this.cargarViajes();
-            } else {
-              Swal.fire({
-                title: 'Error al eliminar viaje',
-                text: data.msg,
-                icon: 'error',
-                confirmButtonText: 'Aceptar'
-              });
-            }
-          },
-          error: (error: any) => {
-            console.log(error);
-            Swal.fire({
-              title: 'Error al eliminar viaje',
-              text: 'Error en el servidor',
-              icon: 'error',
-              confirmButtonText: 'Aceptar'
-            });
-          }
-        });
-        // Swal.fire('viaje eliminado', 'viaje eliminado correctamente', 'success');
-      }
-    });
   }
 }

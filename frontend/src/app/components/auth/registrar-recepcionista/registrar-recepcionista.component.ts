@@ -73,6 +73,10 @@ export class RegistrarRecepcionistaComponent {
     this.router.navigate(['/EditarRecepcionistas']);
   }
 
+  navigateToHistorial(){
+    this.router.navigate(['/Historial']);
+  }
+
   imagen: any = '';
   imagen_path: any = '';
   imagen_base64: any = '';

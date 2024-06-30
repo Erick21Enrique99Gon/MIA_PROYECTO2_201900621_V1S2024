@@ -47,18 +47,22 @@ export class LoginComponent {
             });
             console.log(data.data);
             console.log(data.data[0]);
-            localStorage.setItem('nombre', data.data[0].nombre);
-            localStorage.setItem('apellido', data.data[0].apellido);
-            localStorage.setItem('usuario', data.data[0].usuario);
-            localStorage.setItem('correo', data.data[0].correo);
-            localStorage.setItem('tipo', data.data[0].tipo);
             if(data.data.tipo === 'admin'){
               this.router.navigate(['/Registro']);
             }else if(data.data[0].tipo === 'usuario'){
+              localStorage.setItem('nombre', data.data[0].nombre);
+              localStorage.setItem('apellido', data.data[0].apellido);
+              localStorage.setItem('usuario', data.data[0].usuario);
+              localStorage.setItem('correo', data.data[0].correo);
+              localStorage.setItem('tipo', data.data[0].tipo);
               this.router.navigate(['/Reservar']);
             }else if(data.data[0].tipo === 'recepcionista'){
-              alert('Bienvenido recepcionista');
-              // this.router.navigate(['/recepcionista']);
+              localStorage.setItem('nombre', data.data[0].nombre);
+              localStorage.setItem('apellido', data.data[0].apellido);
+              localStorage.setItem('usuario', data.data[0].usuario);
+              localStorage.setItem('correo', data.data[0].correo);
+              localStorage.setItem('tipo', data.data[0].tipo);
+              this.router.navigate(['/AceptarReserva']);
             }
             // this.router.navigate(['/login']);
           } else {

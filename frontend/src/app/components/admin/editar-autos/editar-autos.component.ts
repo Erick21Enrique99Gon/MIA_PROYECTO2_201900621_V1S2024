@@ -61,6 +61,10 @@ export class EditarAutosComponent {
     this.router.navigate(['/EditarRecepcionistas']);
   }
 
+  navigateToHistorial(){
+    this.router.navigate(['/Historial']);
+  }
+
   ngOnInit(): void {
     this.cargar();
   }

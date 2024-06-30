@@ -335,6 +335,83 @@ const eliminarRecepcionista = async(req,res)=>{
     });
 }
 
+const obtenerHistorial = async(req,res)=>{
+    const Options = {
+        projection: {
+            _id: 0,
+            // nombre: 1,
+            // apellido: 1,
+            usuario: 1
+            // ,
+            // correo: 1,
+            // password_encrypted: 1,
+            // tipo:1,
+            // imagen: 1
+        }
+    };
+    const usuarios = await getFullCollection('Usuarios',{tipo:'usuario'},Options);
+
+    if(usuarios.length === 0){
+        return res.status(500).json({
+            status: false,
+            msg: "No hay usuarios registrados"
+        });
+    }
+
+    historial=[];
+
+    for(let usuario of usuarios){
+        const OptionsViaje = {
+            projection: {
+                _id: 0,
+                nombre_agencia: 1,
+                ciudad_origen: 1,
+                ciudad_destino: 1,
+                dias_vuelo: 1,
+                precio_vuelo: 1
+            }
+        };
+        const collectionViaje = usuario.usuario+'ViajesUsuarios';
+        const usuarioViajes =  await getFullCollection(collectionViaje,{},OptionsViaje);
+        if(usuarioViajes instanceof Error){
+            return res.status(500).json({
+                status: false,
+                msg: "Error",
+                data: usuarioViajes
+            });
+        }
+        // const OptionsAuto = {
+        //     projection: {
+        //         _id: 0,
+        //         nombre_agencia: 1,
+        //         marca: 1,
+        //         placa: 1,
+        //         modelo: 1,
+        //         precio: 1,
+        //         ciudad: 1
+        //     }
+        // };
+        // const collectionAuto = usuario.usuario+'AutosUsuarios';
+        // const usuarioAutos =  await getFullCollection(collectionAuto,{},OptionsAuto);
+        // if(usuarioAutos instanceof Error){
+        //     return res.status(500).json({
+        //         status: false,
+        //         msg: "Error",
+        //         data: usuarioAutos
+        //     });
+        // }
+        historial.push({
+            usuario: usuario.usuario,
+            usuarioViajes,
+            // usuarioAutos
+        });
+    }
+    res.status(200).json({
+        status: true,
+        data: historial
+    });
+}
+
 module.exports = {
     ciclo_for,
     registro,
@@ -347,5 +424,6 @@ module.exports = {
     eliminarViaje,
     eliminarAuto,
     eliminarUsuario,
-    eliminarRecepcionista
+    eliminarRecepcionista,
+    obtenerHistorial
 };

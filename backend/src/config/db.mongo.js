@@ -86,10 +86,26 @@ const dropTable = async (collection) => {
     }
 }
 
+const updateData = async (collection,query,newData) => {
+    const client = new MongoClient(uri);
+    try {
+        await client.connect();
+        const database = client.db(MONGO_DATABASE);
+        const col = database.collection(collection);
+        const result = await col.updateOne(query,newData);
+        return result;
+    } catch (error) {
+        console.error(error);
+    } finally {
+        await client.close();
+    }
+}
+
 module.exports = {
     insertData,
     findData,
     getFullCollection,
     deleteData,
-    dropTable
+    dropTable,
+    updateData
 };

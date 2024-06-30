@@ -60,6 +60,10 @@ export class EditarRecepcionistasComponent {
     this.router.navigate(['/EditarRecepcionistas']);
   }
 
+  navigateToHistorial(){
+    this.router.navigate(['/Historial']);
+  }
+
   ngOnInit(): void {
     this.cargar();
   }

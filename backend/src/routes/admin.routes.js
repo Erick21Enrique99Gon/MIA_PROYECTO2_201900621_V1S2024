@@ -49,4 +49,5 @@ router.post('/viajesEliminar',adminController.eliminarViaje);
 router.post('/autosEliminar',adminController.eliminarAuto);
 router.post('/usuariosEliminar',adminController.eliminarUsuario);
 router.post('/recepcionistasEliminar',adminController.eliminarRecepcionista);
+router.get('/historial',adminController.obtenerHistorial);
 module.exports = router;

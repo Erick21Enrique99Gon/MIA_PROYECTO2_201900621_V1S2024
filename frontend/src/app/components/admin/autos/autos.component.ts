@@ -71,6 +71,10 @@ export class AutosComponent {
     this.router.navigate(['/EditarRecepcionistas']);
   }
 
+  navigateToHistorial(){
+    this.router.navigate(['/Historial']);
+  }
+
   registro(){
     if(this.form_registro.valid){
       const data = this.form_registro.value;

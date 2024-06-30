@@ -9,6 +9,8 @@ import { EditarAutosComponent } from './components/admin/editar-autos/editar-aut
 import { EditarUsuariosComponent } from './components/admin/editar-usuarios/editar-usuarios.component';
 import { EditarRecepcionistasComponent } from './components/admin/editar-recepcionistas/editar-recepcionistas.component';
 import { ReservarComponent } from './components/usuario/reservar/reservar.component';
+import { VerHistorialComponent } from './components/admin/ver-historial/ver-historial.component';
+import { AceptarReservaComponent } from './components/usuario/aceptar-reserva/aceptar-reserva.component';
 export const routes: Routes = [
     {
         path: 'Registro',
@@ -49,5 +51,13 @@ export const routes: Routes = [
     {
         path: 'Reservar',
         component: ReservarComponent
+    },
+    {
+        path: 'Historial',
+        component: VerHistorialComponent
+    },
+    {
+        path: 'AceptarReserva',
+        component: AceptarReservaComponent
     }
 ];

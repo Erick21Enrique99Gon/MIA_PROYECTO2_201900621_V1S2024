@@ -24,6 +24,15 @@ export class ReservarComponent {
   carros: any = [];
   viajes: any = [];
 
+  navigateToLogin(){
+    localStorage.removeItem('nombre');
+    localStorage.removeItem('apellido');
+    localStorage.removeItem('usuario');
+    localStorage.removeItem('correo');
+    localStorage.removeItem('tipo');
+    this.router.navigate(['/login']);
+  }
+
   ngOnInit(): void {
     console.log("Cargando autos");
     this.cargarAutos();

@@ -63,6 +63,10 @@ export class ViajesComponent {
     this.router.navigate(['/EditarRecepcionistas']);
   }
 
+  navigateToHistorial(){
+    this.router.navigate(['/Historial']);
+  }
+
   form_registro = new FormGroup({
     nombre_agencia: new FormControl('', Validators.required),
     ciudad_origen: new FormControl('', Validators.required),
