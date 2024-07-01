@@ -4,3 +4,4 @@ npm install
 ng serve
 ng g c components/auth/login <componenetes>
 ng g s <servicios> services/usuario
+npm run build --prod
